@@ -1,0 +1,32 @@
+html{
+  box-sizing: border-box;
+}
+
+*, *::after, *::before{
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root{
+  height: 100%;
+  font-family: 'Rubik', sans-serif;
+}
+body{
+  background-color: #F1F1F1;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+  font-family: sans-serif;
+}
+
+a:hover{
+  text-decoration: none;
+  color: inherit;
+}
+
+ul{
+  list-style-type: none;
+}

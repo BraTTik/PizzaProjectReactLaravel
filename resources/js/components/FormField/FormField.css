@@ -1,0 +1,39 @@
+.form-field{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.form-input{
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #FFDA73;
+    padding: .5rem 1rem;
+    transition: all .2s ease;
+    font-family: 'Rubik', sans-serif;
+}
+.form-input:focus{
+    border-bottom: 2px solid #FFAA40;
+}
+
+.form-error{
+    font-size: .8rem;
+    color: rgb(139, 3, 3);
+}
+
+.form-input.is-error{
+    border-bottom: 2px solid  rgb(139, 3, 3);
+    animation-name: animate;
+    animation-duration: .1s;
+    animation-iteration-count: 2;
+    animation-timing-function: ease;
+}
+
+@keyframes animate{
+    from{
+        transform: translateX(-5px);
+    }
+    to{
+        transform: translateX(5px);
+    }
+}
