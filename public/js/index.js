@@ -73532,6 +73532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contexts_AppStateActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Contexts/AppStateActions */ "./resources/js/Contexts/AppStateActions.js");
 /* harmony import */ var _TabStyles_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./TabStyles.css */ "./resources/js/components/Login/TabStyles.css");
 /* harmony import */ var _TabStyles_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_TabStyles_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../Popup */ "./resources/js/components/Popup/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -73563,6 +73564,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var saveUser = function saveUser(user) {
   sessionStorage.setItem('user', JSON.stringify(user));
 };
@@ -73578,6 +73580,15 @@ var LoginComponent = function LoginComponent(_ref) {
   var _useAppState = Object(_Contexts_AppState__WEBPACK_IMPORTED_MODULE_9__["useAppState"])(),
       state = _useAppState.state,
       dispatch = _useAppState.dispatch;
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isDisplayPopup = _useState4[0],
+      setIsDisplayPopup = _useState4[1];
+
+  var closePopup = function closePopup() {
+    setIsDisplayPopup(false);
+  };
 
   var LoginSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
@@ -73632,9 +73643,7 @@ var LoginComponent = function LoginComponent(_ref) {
               console.log(result);
 
               if (result.success == "ok") {
-                console.log('OK');
                 setError('');
-                history.push('/');
               } else {
                 setError({
                   message: 'Email exists already'
@@ -73678,7 +73687,10 @@ var LoginComponent = function LoginComponent(_ref) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_tabs__WEBPACK_IMPORTED_MODULE_5__["TabPanel"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SignUpForm__WEBPACK_IMPORTED_MODULE_6__["SignUpForm"], {
     submit: SignUpSubmit,
     errorForm: error
-  }))))));
+  }))))), isDisplayPopup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_12__["Popup"], {
+    title: "Warning",
+    onClick: closePopup
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "This is test app!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, "Do Not Use Real Emails and Passwords!"))));
 };
 
 var Login = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["withRouter"])(LoginComponent);

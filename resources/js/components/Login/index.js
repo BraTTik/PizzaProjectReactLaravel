@@ -10,6 +10,7 @@ import { useAppState } from '../../Contexts/AppState';
 import { LOGIN } from '../../Contexts/AppStateActions';
 import { withRouter } from 'react-router-dom';
 import './TabStyles.css';
+import { Popup } from '../Popup';
 
 const saveUser = ( user ) => {
     sessionStorage.setItem('user', JSON.stringify(user));
@@ -18,8 +19,11 @@ const saveUser = ( user ) => {
 const LoginComponent = ( {history}) => {
     const [error, setError] = useState('');
     const { state, dispatch } = useAppState();
+    const [isDisplayPopup, setIsDisplayPopup] = useState(true);
 
-
+    const closePopup = () => {
+        setIsDisplayPopup(false);
+    }
     const LoginSubmit = async (data) => {
        const result = await login(data);
        if(result.success === 'ok'){
@@ -36,9 +40,7 @@ const LoginComponent = ( {history}) => {
         const result = await register(data);
         console.log(result);
         if(result.success == "ok"){
-            console.log('OK');
             setError('');
-            history.push('/');
         }else{
             setError({message: 'Email exists already' })
         }
@@ -68,6 +70,11 @@ const LoginComponent = ( {history}) => {
                     </Tabs>
                 </FormContainer>
             </LoginContainer>
+            {isDisplayPopup && 
+                <Popup title="Warning" onClick={closePopup}>
+                    <p>This is test app!</p>
+                    <p><strong>Do Not Use Real Emails and Passwords!</strong></p>
+                </Popup>}
         </AppLayout>
     )
 }
