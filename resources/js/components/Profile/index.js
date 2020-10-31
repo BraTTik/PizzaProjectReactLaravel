@@ -8,10 +8,13 @@ import { LOGOUT } from '../../Contexts/AppStateActions';
 import { Redirect, withRouter } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { History } from './History';
+import { Popup } from '../Popup';
 
 const ProfileComponent = ({ history }) => {
     const { state, dispatch } = useAppState();
+
     const [message, setMessage] = useState('');
+    const [isDisplayPopup, setIsDisplayPopup] = useState(false);
 
     if(!state.user.id){
         return <Redirect to="/login" />
@@ -25,11 +28,17 @@ const ProfileComponent = ({ history }) => {
         const data = { id: state.user.id, ...userData}
         const result = await saveAddress(data);
         if(result.success === 'ok'){
-            setMessage('Your data saved')
+            setMessage('Your data saved');
+            setIsDisplayPopup(true);
         }else{
             console.log(result.error);
             setMessage('Something happened wrong. Try again later');
+            setIsDisplayPopup(true);
         }
+    }
+
+    const closePopup = () => {
+        setIsDisplayPopup(false);
     }
 
     return (
@@ -55,9 +64,10 @@ const ProfileComponent = ({ history }) => {
                             <History />
                         </OrderContainer>
                     </TabPanel>
+                    <TabPanel />
                 </Tabs>
             </CheckoutContainer>
-            <p>{message}</p>
+            {isDisplayPopup && <Popup title="Message" onClick={closePopup}>{message}</Popup>}
         </AppLayout>
     )
 }

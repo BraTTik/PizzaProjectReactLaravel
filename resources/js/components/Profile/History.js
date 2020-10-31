@@ -13,7 +13,9 @@ export const History = () => {
     useEffect(()=>{
         const loadData = async () =>{
             const data = await getHistory(state.user.id);
-            setOrders(data);
+            if(data){
+                setOrders(data);
+            }
             setIsLoading(false);
         } 
 
@@ -25,9 +27,14 @@ export const History = () => {
     }
     return (
         <>
-            {orders.map( order => {
-                return <HistoryItem key={order.id} {...order}/>
-            })}
+            {orders.length > 0 ? (
+                orders.map( order => {
+                    return <HistoryItem key={order.id} {...order}/>
+                })
+
+            ) : (
+                <div>You haven't ordered anything</div>
+            )}
         </>
     )
 }

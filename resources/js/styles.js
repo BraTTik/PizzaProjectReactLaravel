@@ -42,9 +42,15 @@ export const NavPanel = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    @media (max-width: 500px){
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
 `
 export const NavPanelItem = styled.div`
     margin-left: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
 `
 
 export const AppContainer = styled.div`
@@ -52,6 +58,9 @@ export const AppContainer = styled.div`
     padding-top: 5rem;
     color: ${colorSet.textColor};
     background-color: ${colorSet.lightgray};
+    @media (max-width: 500px){
+        padding-top: 10rem;
+    }
 `
 
 export const CustomSelect = styled.div`
@@ -296,4 +305,57 @@ export const Loader = styled.div`
 export const HistoryItemContainer = styled.div`
     box-shadow: 0px 3px 5px ${colorSet.border + 55};
     padding: 1rem;
+`
+export const PopupWindowContainer = styled.div`
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+`
+export const PopupWindow = styled.div`
+    min-width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 0px 5px ${colorSet.border + 55};
+    border-radius: 10px;
+    overflow: hidden;
+`
+
+export const PopupHeader = styled.div`
+    width: 100%;
+    background-color: ${colorSet.main};
+    border-bottom: 1px solid ${colorSet.border};
+    color: #fff;
+    border-bottom: 1px solid ${colorSet.border};
+    padding: 1rem;
+    text-align: center;
+`
+export const PopupFooter = styled.div`
+    text-align: right;
+    padding: .5rem 1rem;
+`
+
+export const PopupBody = styled.div`
+  padding: 1rem;
+  min-height: 3rem;
+  border-bottom: 1px solid ${colorSet.border + 55};
+  text-align: center;
+`
+export const CounterContainer = styled.span`
+    width: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: -10px;
+    right: -4px;
+    border-radius: 50%;
+    background-color: ${colorSet.border};
+    color: #fff;
+    font-size: .7rem;
+    text-align: center;
 `

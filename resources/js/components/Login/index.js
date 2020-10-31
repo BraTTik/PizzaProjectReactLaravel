@@ -17,7 +17,7 @@ const saveUser = ( user ) => {
 
 const LoginComponent = ( {history}) => {
     const [error, setError] = useState('');
-    const { dispatch } = useAppState();
+    const { state, dispatch } = useAppState();
 
 
     const LoginSubmit = async (data) => {
@@ -45,6 +45,10 @@ const LoginComponent = ( {history}) => {
     }
     const clearError = () => {
         setError('');
+    }
+
+    if(state.user.id){
+        return <Redirect to="/profile" />
     }
     return (
         <AppLayout>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { useAppState } from '../../Contexts/AppState';
 import { AppLayout } from '../AppLayout';
 import { OrderContainer } from '../../styles';
@@ -6,6 +6,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { Total, MainButton } from '../../styles';
 import { placeOrder } from '../../api';
 import { useCart } from '../../Contexts/CartContext';
+import { Popup } from '../Popup';
 
 const OrderComponent = ({history}) => {
     const { state } = useAppState();
@@ -14,13 +15,20 @@ const OrderComponent = ({history}) => {
     if(!order.id){
         return <Redirect to="/"/>;
     }
+    console.log(order);
+    const [isPopup, setIsPopup] = useState(false);
+
+    const popupHandler = () => {
+        setIsPopup(false);
+        history.push('/');
+    }
 
     const placeOrderHandler =  async() => {
+        
         const result = await placeOrder({user_id: state.user.id, ...order});
         if(result.success === 'ok'){
-            console.log('ok')
             clearCart();
-            history.push('/');
+            setIsPopup(true);
         }else{
             console.log(result.error);
         }
@@ -52,6 +60,15 @@ const OrderComponent = ({history}) => {
                     </MainButton>
                 </div>
             </OrderContainer>
+            {
+                isPopup
+                &&(
+                    <Popup title="Order placed" onClick={popupHandler}>
+                        <p>Your order is placed!</p>
+                        <p>Wait for a call to confirm all details.</p>
+                    </Popup>
+                )
+            }
         </AppLayout>
     )
 }

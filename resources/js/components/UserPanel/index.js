@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainButton, NavPanel, NavPanelItem } from '../../styles';
+import { MainButton, NavPanel, NavPanelItem, CounterContainer } from '../../styles';
 import { useAppState } from '../../Contexts/AppState';
 import { CHANGE_CURRENCY } from '../../Contexts/AppStateActions';
 import { Select } from '../Select';
@@ -33,10 +33,10 @@ export const UserPanel = ( {useCartHook = useCart}) => {
                 ) }
             </NavPanelItem>
             <NavPanelItem>
+                <CounterContainer>
+                    { pizzas.length ? getTotalAmount() + ' ' : ''} 
+                </CounterContainer>
                 <MainButton as={Link} to="/cart">
-                    <span>
-                        { pizzas.length ? getTotalAmount() + ' ' : ''} 
-                    </span>
                     Cart
                 </MainButton>
             </NavPanelItem>
