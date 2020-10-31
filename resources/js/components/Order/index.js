@@ -4,7 +4,7 @@ import { AppLayout } from '../AppLayout';
 import { OrderContainer } from '../../styles';
 import { Redirect, withRouter } from 'react-router-dom';
 import { Total, MainButton } from '../../styles';
-import { placeOrder, sendData } from '../../api';
+import { placeOrder } from '../../api';
 import { useCart } from '../../Contexts/CartContext';
 
 const OrderComponent = ({history}) => {
@@ -15,8 +15,15 @@ const OrderComponent = ({history}) => {
         return <Redirect to="/"/>;
     }
 
-    const placeOrderHandler = () => {
-        const result = sendData({user_id: state.user.id, ...order});
+    const placeOrderHandler =  async() => {
+        const result = await placeOrder({user_id: state.user.id, ...order});
+        if(result.success === 'ok'){
+            console.log('ok')
+            clearCart();
+            history.push('/');
+        }else{
+            console.log(result.error);
+        }
     }
     return (
         <AppLayout>

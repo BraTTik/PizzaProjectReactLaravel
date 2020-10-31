@@ -268,10 +268,12 @@ export const FormContainer = styled.div`
 `
 
 export const LoaderContainer = styled.div`
-    min-height: 100%;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff;
 `
 const rotate = keyframes`
   from {
@@ -289,4 +291,9 @@ export const Loader = styled.div`
     position: absolute;
     top: 40%;
     left: 40%;
+`
+
+export const HistoryItemContainer = styled.div`
+    box-shadow: 0px 3px 5px ${colorSet.border + 55};
+    padding: 1rem;
 `

@@ -1,20 +1,26 @@
 import React, {useState} from 'react';
 import { AppLayout } from '../AppLayout';
-import { CheckoutContainer } from '../../styles';
+import { CheckoutContainer, OrderContainer } from '../../styles';
 import { ProfileForm } from './ProfileForm';
 import { saveAddress } from '../../api'
-import { useAppState } from '../../Contexts/AppState';
-import { Redirect } from 'react-router-dom';
+import { useAppState, unLoadUser } from '../../Contexts/AppState';
+import { LOGOUT } from '../../Contexts/AppStateActions';
+import { Redirect, withRouter } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { History } from './History';
 
-export const Profile = () => {
-    const { state } = useAppState();
+const ProfileComponent = ({ history }) => {
+    const { state, dispatch } = useAppState();
     const [message, setMessage] = useState('');
 
     if(!state.user.id){
         return <Redirect to="/login" />
     }
-
+    const handleLogout = () => {
+        dispatch({type: LOGOUT});
+        unLoadUser();
+        history.push('/');
+    }
     const handleSubmit = async (userData) => {
         const data = { id: state.user.id, ...userData}
         const result = await saveAddress(data);
@@ -37,12 +43,17 @@ export const Profile = () => {
                         <Tab className="tabs_tab">
                             Order History
                         </Tab>
+                        <Tab className="tabs_tab" onClick={handleLogout}>
+                            Logout
+                        </Tab>
                     </TabList>
                     <TabPanel>
                         <ProfileForm submit={handleSubmit}/>
                     </TabPanel>
                     <TabPanel>
-                        <div>Order History</div>
+                        <OrderContainer>
+                            <History />
+                        </OrderContainer>
                     </TabPanel>
                 </Tabs>
             </CheckoutContainer>
@@ -51,3 +62,4 @@ export const Profile = () => {
     )
 }
 
+export const Profile = withRouter(ProfileComponent);

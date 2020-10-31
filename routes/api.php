@@ -31,3 +31,4 @@ Route::post('/user/contacts', 'App\Http\Controllers\UserController@update');
 Route::get('/user/contacts/{id}', 'App\Http\Controllers\UserController@contacts');
 
 Route::post('/order', 'App\Http\Controllers\OrderController@store');
+Route::get('/order/{id}', 'App\Http\Controllers\OrderController@index');

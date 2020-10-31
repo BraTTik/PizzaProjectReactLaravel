@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
 use Exception;
-use  Symfony\Component\VarDumper\Dumper\CliDumper as Dumper;
-use Symfony\Component\VarDumper\Cloner\VarCloner as Cloner;
 
 class UserController extends Controller
 {
@@ -100,9 +98,6 @@ class UserController extends Controller
 
     private function updateAddress(Request $request, $id)
     {
-        (new Dumper())->dump( 
-            (new Cloner())->cloneVar('Hel')
-        );
         try{
             $address = Address::where('user_id', '=', $id)->first();
             $address->street = $request->input('street');
@@ -131,11 +126,8 @@ class UserController extends Controller
                 'apartment' => $request->input('apartment')
                 ]);
             }catch(Exception $err){
-                (new Dumper())->dump( 
-                    (new Cloner())->cloneVar('Exception in create')
-                );
-            return ["success" => "no", "error" => $err->getMessage()];
-        }
+                return ["success" => "no", "error" => $err->getMessage()];
+            }
 
         return ["success" => "ok"];
     }

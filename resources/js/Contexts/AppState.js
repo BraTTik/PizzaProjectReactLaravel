@@ -23,6 +23,9 @@ const AppStateReducer = (state, action) => {
             const { id, name, last_name, email } = action.payload;
             return { ...state, user: { id, name, lastName: last_name, email } }
         }
+        case actions.LOGOUT: {
+            return { ...state, user: {}};
+        }
 
         default:
             return state;
@@ -30,12 +33,16 @@ const AppStateReducer = (state, action) => {
 
 }
 
-const loadUser = () => {
+export const loadUser = () => {
     if(sessionStorage.getItem('user')){
         const user = JSON.parse(sessionStorage.getItem('user'));
         return user
     }
     return null;
+}
+
+export const unLoadUser = () => {
+    sessionStorage.removeItem('user');
 }
 
 export const AppStateProvider = ({children}) => {

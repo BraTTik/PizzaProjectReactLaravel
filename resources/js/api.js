@@ -17,6 +17,10 @@ export const placeOrder = ( data ) => {
     return sendData('/api/order', data);
 }
 
+export const getHistory = (id) => {
+    return fetch('/api/order/'+id).then(response => response.json()).catch(console.log);
+}
+
 export const sendData = ( url, data ) => {
     return fetch(url, {
         method: 'POST',
