@@ -11,15 +11,20 @@ export const History = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
+        let isMounted = true;
         const loadData = async () =>{
             const data = await getHistory(state.user.id);
             if(data){
-                setOrders(data);
+               isMounted && setOrders(data);
             }
-            setIsLoading(false);
+            isMounted && setIsLoading(false);
         } 
 
         loadData();
+
+        return () => {
+            isMounted = false;
+        }
     }, []);
 
     if(isLoading){

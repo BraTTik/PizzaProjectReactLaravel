@@ -17,11 +17,21 @@ const validationSchema = yup.object().shape({
 export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} ) => {
     const {phone, house, street, building, apartment} = contacts;
 
-    const [phoneValue, setPhone] = useState(phone);
-    const [houseValue, setHouse] = useState(house);
-    const [streetValue, setStreet] = useState(street);
-    const [buildingValue, setBuilding] = useState(building);
-    const [apartmentValue, setApartment] = useState(apartment);
+    const [phoneValue, setPhone] = useState('');
+    const [houseValue, setHouse] = useState('');
+    const [streetValue, setStreet] = useState('');
+    const [buildingValue, setBuilding] = useState('');
+    const [apartmentValue, setApartment] = useState('');
+
+    useEffect(() => {
+        if(contacts){
+            setPhone(phone);
+            setHouse(house);
+            setStreet(street);
+            setBuilding(building);
+            setApartment(apartment);
+        }
+    }, [contacts]);
 
 
     const {register, errors, handleSubmit} = useForm({
@@ -40,7 +50,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     inputRef={register}
                     placeholder="(000) 111-22-33"
                     errors={errors.phone}
-                    value={phoneValue || phone}
+                    value={phoneValue || ''}
                     onChange = { e => {
                         let value = e.target.value;
                         if(e.nativeEvent.inputType === 'deleteContentBackward'){
@@ -64,7 +74,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     type="text"
                     inputRef={register}
                     errors={errors.street}
-                    value={streetValue || street}
+                    value={streetValue || ''}
                     onChange={ e => setStreet(e.target.value)}
                     style={{flexBasis: "600px"}}
                 />
@@ -75,7 +85,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     inputRef={register}
                     errors={errors.house}
                     style={{flexBasis: '200px'}}
-                    value={houseValue || house}
+                    value={houseValue || ''}
                     onChange={ e => setHouse(e.target.value)}
 
                 />
@@ -85,7 +95,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     type="text"
                     inputRef={register}
                     style={{flexBasis: '200px'}}
-                    value={buildingValue || building}
+                    value={buildingValue || ''}
                     onChange={ e => setBuilding(e.target.value)}
 
                 />
@@ -96,7 +106,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     inputRef={register}
                     errors={errors.apartment}
                     style={{flexBasis: '200px'}}
-                    value={apartmentValue || apartment}
+                    value={apartmentValue || ''}
                     onChange={ e => setApartment(e.target.value)}
 
                 />

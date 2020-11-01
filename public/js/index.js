@@ -72984,7 +72984,6 @@ var Component = function Component(_ref) {
         total: getTotal()
       }
     };
-    console.log(data);
     dispatch({
       type: _Contexts_AppStateActions__WEBPACK_IMPORTED_MODULE_7__["MAKE_ORDER"],
       payload: data
@@ -73772,8 +73771,6 @@ var OrderComponent = function OrderComponent(_ref) {
     });
   }
 
-  console.log(order);
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       isPopup = _useState2[0],
@@ -74048,6 +74045,8 @@ var History = function History() {
       setIsLoading = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var isMounted = true;
+
     var loadData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var data;
@@ -74062,10 +74061,10 @@ var History = function History() {
                 data = _context.sent;
 
                 if (data) {
-                  setOrders(data);
+                  isMounted && setOrders(data);
                 }
 
-                setIsLoading(false);
+                isMounted && setIsLoading(false);
 
               case 5:
               case "end":
@@ -74081,6 +74080,9 @@ var History = function History() {
     }();
 
     loadData();
+    return function () {
+      isMounted = false;
+    };
   }, []);
 
   if (isLoading) {
@@ -74208,30 +74210,40 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
       building = contacts.building,
       apartment = contacts.apartment;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(phone),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
       phoneValue = _useState2[0],
       setPhone = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(house),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
       houseValue = _useState4[0],
       setHouse = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(street),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       streetValue = _useState6[0],
       setStreet = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(building),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
       buildingValue = _useState8[0],
       setBuilding = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(apartment),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
       apartmentValue = _useState10[0],
       setApartment = _useState10[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (contacts) {
+      setPhone(phone);
+      setHouse(house);
+      setStreet(street);
+      setBuilding(building);
+      setApartment(apartment);
+    }
+  }, [contacts]);
 
   var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_2__["useForm"])({
     mode: "onBlur",
@@ -74253,7 +74265,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     inputRef: register,
     placeholder: "(000) 111-22-33",
     errors: errors.phone,
-    value: phoneValue || phone,
+    value: phoneValue || '',
     onChange: function onChange(e) {
       var value = e.target.value;
 
@@ -74273,7 +74285,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     type: "text",
     inputRef: register,
     errors: errors.street,
-    value: streetValue || street,
+    value: streetValue || '',
     onChange: function onChange(e) {
       return setStreet(e.target.value);
     },
@@ -74289,7 +74301,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     style: {
       flexBasis: '200px'
     },
-    value: houseValue || house,
+    value: houseValue || '',
     onChange: function onChange(e) {
       return setHouse(e.target.value);
     }
@@ -74301,7 +74313,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     style: {
       flexBasis: '200px'
     },
-    value: buildingValue || building,
+    value: buildingValue || '',
     onChange: function onChange(e) {
       return setBuilding(e.target.value);
     }
@@ -74314,7 +74326,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     style: {
       flexBasis: '200px'
     },
-    value: apartmentValue || apartment,
+    value: apartmentValue || '',
     onChange: function onChange(e) {
       return setApartment(e.target.value);
     }
@@ -75167,6 +75179,8 @@ var withContacts = function withContacts(WrappedComponent) {
         state = _useAppState.state;
 
     Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+      var isMounted = true;
+
       var fetchContacts = /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
           var data, contactData;
@@ -75183,7 +75197,7 @@ var withContacts = function withContacts(WrappedComponent) {
                     name: state.user.name,
                     lastName: state.user.lastName
                   });
-                  setContact(contactData);
+                  isMounted && setContact(contactData);
 
                 case 5:
                 case "end":
@@ -75201,6 +75215,10 @@ var withContacts = function withContacts(WrappedComponent) {
       if (state.user.id) {
         fetchContacts(state.user.id);
       }
+
+      return function () {
+        isMounted = false;
+      };
     }, []);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(WrappedComponent, _extends({
       contacts: contact

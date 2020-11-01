@@ -15,7 +15,6 @@ const OrderComponent = ({history}) => {
     if(!order.id){
         return <Redirect to="/"/>;
     }
-    console.log(order);
     const [isPopup, setIsPopup] = useState(false);
 
     const popupHandler = () => {

@@ -17,6 +17,7 @@ export const withContacts = (WrappedComponent) => {
         const { state } = useAppState();
 
         useEffect(()=>{
+            let isMounted = true;
             const fetchContacts = async (id) => {
                 const data = await contacts(id);
                 const contactData = {
@@ -24,10 +25,14 @@ export const withContacts = (WrappedComponent) => {
                     name: state.user.name,
                     lastName: state.user.lastName,
                 }
-                setContact(contactData);
+                isMounted && setContact(contactData);
             }
             if(state.user.id){
                 fetchContacts(state.user.id);
+            }
+
+            return () => {
+                isMounted = false;
             }
     
         },[]);

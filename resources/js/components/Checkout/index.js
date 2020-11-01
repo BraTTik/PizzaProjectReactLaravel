@@ -16,7 +16,6 @@ const Component = ({ history }) => {
         const data = { 
             user: { ...userData }, 
             details: {pizzas: [...pizzas], currency: state.currency, total: getTotal() }}
-        console.log(data);
         dispatch({type: MAKE_ORDER, payload: data});
         history.push('/order');
     }

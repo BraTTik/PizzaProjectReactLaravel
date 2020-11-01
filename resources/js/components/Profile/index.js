@@ -19,11 +19,13 @@ const ProfileComponent = ({ history }) => {
     if(!state.user.id){
         return <Redirect to="/login" />
     }
+
     const handleLogout = () => {
         dispatch({type: LOGOUT});
         unLoadUser();
         history.push('/');
     }
+
     const handleSubmit = async (userData) => {
         const data = { id: state.user.id, ...userData}
         const result = await saveAddress(data);
@@ -48,15 +50,15 @@ const ProfileComponent = ({ history }) => {
                     <TabList className="tabs">
                         <Tab className="tabs_tab">
                             Contacts
-                        </Tab>
+                        </Tab> 
                         <Tab className="tabs_tab">
                             Order History
                         </Tab>
-                        <Tab className="tabs_tab" onClick={handleLogout}>
+                        <Tab className="tabs_tab" onClick={handleLogout} >
                             Logout
                         </Tab>
                     </TabList>
-                    <TabPanel>
+                     <TabPanel>
                         <ProfileForm submit={handleSubmit}/>
                     </TabPanel>
                     <TabPanel>
@@ -64,10 +66,11 @@ const ProfileComponent = ({ history }) => {
                             <History />
                         </OrderContainer>
                     </TabPanel>
-                    <TabPanel />
+                   <TabPanel></TabPanel>
                 </Tabs>
             </CheckoutContainer>
-            {isDisplayPopup && <Popup title="Message" onClick={closePopup}>{message}</Popup>}
+            {isDisplayPopup && <Popup title="Message" onClick={closePopup}>{message}</Popup>
+            }
         </AppLayout>
     )
 }
