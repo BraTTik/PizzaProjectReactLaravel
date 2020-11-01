@@ -72410,7 +72410,7 @@ var saveAddress = function saveAddress(data) {
 var contacts = function contacts(id) {
   return fetch("/api/user/contacts/".concat(id)).then(function (response) {
     return response.json();
-  });
+  })["catch"](console.log);
 };
 
 /***/ }),
@@ -73640,17 +73640,20 @@ var LoginComponent = function LoginComponent(_ref) {
 
             case 2:
               result = _context2.sent;
-              console.log(result);
 
               if (result.success == "ok") {
                 setError('');
+                dispatch({
+                  type: _Contexts_AppStateActions__WEBPACK_IMPORTED_MODULE_10__["LOGIN"],
+                  payload: result.user
+                });
               } else {
                 setError({
                   message: 'Email exists already'
                 });
               }
 
-            case 5:
+            case 4:
             case "end":
               return _context2.stop();
           }

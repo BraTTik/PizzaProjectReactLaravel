@@ -45,5 +45,5 @@ export const saveAddress = ( data ) => {
 }
 
 export const contacts = (id) => {
-    return fetch(`/api/user/contacts/${id}`).then(response => response.json());
+    return fetch(`/api/user/contacts/${id}`).then(response => response.json()).catch(console.log);
 }

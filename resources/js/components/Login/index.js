@@ -38,13 +38,14 @@ const LoginComponent = ( {history}) => {
 
     const SignUpSubmit = async (data) => {
         const result = await register(data);
-        console.log(result);
         if(result.success == "ok"){
             setError('');
+            dispatch({type: LOGIN, payload: result.user})
         }else{
             setError({message: 'Email exists already' })
         }
     }
+
     const clearError = () => {
         setError('');
     }

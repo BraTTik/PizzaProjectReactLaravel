@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         //
         try{
-            User::create([
+            $record = User::create([
                 'name' => $request->input('name'),
                 'last_name' => $request->input('lastName'),
                 'password' => $request->input('password'),
@@ -42,7 +42,7 @@ class UserController extends Controller
             return ["success" => "no", "error" => $err->getMessage()];
         }
 
-        return ["success" => "ok"];
+        return ["success" => "ok", "user" => $record];
     }
 
     /**
