@@ -48,7 +48,6 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     label="Phone"
                     type="tel"
                     inputRef={register}
-                    placeholder="(000) 111-22-33"
                     errors={errors.phone}
                     value={phoneValue || ''}
                     onChange = { e => {
@@ -77,6 +76,7 @@ export const ProfileForm = withContacts( ( {submit = async () => {}, contacts} )
                     value={streetValue || ''}
                     onChange={ e => setStreet(e.target.value)}
                     style={{flexBasis: "600px"}}
+                    value={streetValue}
                 />
                 <FormField 
                     name="house"

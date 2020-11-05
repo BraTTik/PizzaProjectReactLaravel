@@ -217,6 +217,8 @@ export const Total = styled.div`
 export const FormFieldContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 1rem;
     &>*{
         flex-basis: 200px;
         flex-grow: 1;

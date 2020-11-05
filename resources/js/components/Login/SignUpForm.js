@@ -24,6 +24,9 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
     const [repassword, setRepassword] = useState('');
     const [repasswordError, setRepasswordError] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     useEffect(()=>{ 
         if(repassword && (password === repassword)){
@@ -45,6 +48,8 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
                 inputRef={register}
                 label="Email"
                 errors={errors.email || errorForm}
+                onChange={ e => setEmail(e.target.value)}
+                value={email}
             />
             <FormField 
                 name="password"
@@ -53,6 +58,8 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
                 label="Password"
                 errors={errors.password}
                 onBlur={ e => setPassword(e.target.value)}
+                onChange = { e => setPassword(e.target.value)}
+                value={password}
             />
             <FormField 
                 name="repassword"
@@ -61,6 +68,7 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
                 label="Confirm password"
                 errors={errors.repassword || repasswordError}
                 onChange={ e => setRepassword(e.target.value)}
+                value={repassword}
             />
             <FormField 
                 name="name"
@@ -68,10 +76,12 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
                 inputRef={register}
                 label="Name"
                 errors={errors.name}
-                normalize = { value => {
+                onChange = { e => {
+                    const value = e.target.value;
                     const firstLetter = value[0].toUpperCase();
-                    return firstLetter + value.substr(1);
+                    setName(firstLetter + value.substr(1));
                 }}
+                value={name}
             />
             <FormField
                 name="lastName"
@@ -79,10 +89,12 @@ export const SignUpForm = ( { submit = async () => {} , errorForm}) => {
                 inputRef={register}
                 label="Last Name"
                 errors={errors.lastName}
-                normalize = { value => {
+                onChange = { e => {
+                    const value = e.target.value;
                     const firstLetter = value[0].toUpperCase();
-                    return firstLetter + value.substr(1);
+                    setLastName(firstLetter + value.substr(1));
                 }}
+                value={lastName}
             />
             <div style={{ textAlign: "right" }}>
                 <MainButton as="input" type="submit" value="Sign up" disabled={isButtonDisabled}/>

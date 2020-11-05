@@ -1,32 +1,75 @@
-.form-field{
-    display: flex;
-    flex-direction: column;
+.form-field-wrapper{
     margin: 1rem;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+.form-field{
+    position: relative;
+   margin-bottom: 1rem;
 }
 
 .form-input{
+    width: 100%;
+    height: 100%;
     border: none;
     outline: none;
-    border-bottom: 2px solid #FFDA73;
-    padding: .5rem 1rem;
-    transition: all .2s ease;
+    padding: 2rem 1rem 1rem;
     font-family: 'Rubik', sans-serif;
 }
-.form-input:focus{
-    border-bottom: 2px solid #FFAA40;
+
+.form-label{
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-bottom: 2px solid #FFDA73;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.form-label::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: -1px;
+    left: -100%;
+    border-bottom: 2px solid #ffaa40;
+    transition: left .2s ease;
+}
+
+.form-label span{
+    position: absolute;
+    margin: 0;
+    bottom: .5rem;
+    left: 1rem;
+    transition: all .2s ease;
+}
+
+.form-input:focus + .form-label span,
+.form-input.valid + .form-label span
+{
+    bottom: 2.5rem;
+    color:  #FFDA73;
+}
+
+.form-input.valid + .form-label:after,
+.form-input.is-error + .form-label:after{
+    left: 0;
+}
+
+.form-input.is-error + .form-label:after{
+    border-bottom: 2px solid rgb(97, 3, 3);
 }
 
 .form-error{
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    color: rgb(97, 3, 3);
     font-size: .8rem;
-    color: rgb(139, 3, 3);
-}
-
-.form-input.is-error{
-    border-bottom: 2px solid  rgb(139, 3, 3);
-    animation-name: animate;
-    animation-duration: .1s;
-    animation-iteration-count: 2;
-    animation-timing-function: ease;
+    white-space: nowrap;
 }
 
 @keyframes animate{

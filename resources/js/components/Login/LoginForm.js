@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { FormField } from '../FormField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -17,6 +17,9 @@ export const LoginForm = ( { submit = async () => {}, errorForm }) => {
         resolver: yupResolver(validationScheme),
     });
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return(
         <form action="POST" onSubmit={handleSubmit(submit)}>
             <FormField 
@@ -25,6 +28,8 @@ export const LoginForm = ( { submit = async () => {}, errorForm }) => {
                 inputRef={register}
                 label="Email"
                 errors={errors.email}
+                value={email}
+                onChange={ e => setEmail(e.target.value)}
             />
             <FormField 
                 name="password"
@@ -32,6 +37,8 @@ export const LoginForm = ( { submit = async () => {}, errorForm }) => {
                 inputRef={register}
                 label="Password"
                 errors={errors.password}
+                value={password}
+                onChange={ e => setPassword(e.target.value)}
             />
             <div style={{ textAlign: "right", color: "gray"}}>
                 <Link to="#">

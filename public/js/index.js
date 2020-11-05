@@ -1101,7 +1101,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".form-field{\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 1rem;\r\n}\r\n\r\n.form-input{\r\n    border: none;\r\n    outline: none;\r\n    border-bottom: 2px solid #FFDA73;\r\n    padding: .5rem 1rem;\r\n    transition: all .2s ease;\r\n    font-family: 'Rubik', sans-serif;\r\n}\r\n.form-input:focus{\r\n    border-bottom: 2px solid #FFAA40;\r\n}\r\n\r\n.form-error{\r\n    font-size: .8rem;\r\n    color: rgb(139, 3, 3);\r\n}\r\n\r\n.form-input.is-error{\r\n    border-bottom: 2px solid  rgb(139, 3, 3);\r\n    -webkit-animation-name: animate;\r\n            animation-name: animate;\r\n    -webkit-animation-duration: .1s;\r\n            animation-duration: .1s;\r\n    -webkit-animation-iteration-count: 2;\r\n            animation-iteration-count: 2;\r\n    -webkit-animation-timing-function: ease;\r\n            animation-timing-function: ease;\r\n}\r\n\r\n@-webkit-keyframes animate{\r\n    from{\r\n        transform: translateX(-5px);\r\n    }\r\n    to{\r\n        transform: translateX(5px);\r\n    }\r\n}\r\n\r\n@keyframes animate{\r\n    from{\r\n        transform: translateX(-5px);\r\n    }\r\n    to{\r\n        transform: translateX(5px);\r\n    }\r\n}", ""]);
+exports.push([module.i, ".form-field-wrapper{\r\n    margin: 1rem;\r\n    margin-bottom: 0;\r\n    overflow: hidden;\r\n}\r\n.form-field{\r\n    position: relative;\r\n   margin-bottom: 1rem;\r\n}\r\n\r\n.form-input{\r\n    width: 100%;\r\n    height: 100%;\r\n    border: none;\r\n    outline: none;\r\n    padding: 2rem 1rem 1rem;\r\n    font-family: 'Rubik', sans-serif;\r\n}\r\n\r\n.form-label{\r\n    width: 100%;\r\n    height: 100%;\r\n    display: block;\r\n    border-bottom: 2px solid #FFDA73;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n\r\n\r\n.form-label::after{\r\n    content: '';\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n    bottom: -1px;\r\n    left: -100%;\r\n    border-bottom: 2px solid #ffaa40;\r\n    transition: left .2s ease;\r\n}\r\n\r\n.form-label span{\r\n    position: absolute;\r\n    margin: 0;\r\n    bottom: .5rem;\r\n    left: 1rem;\r\n    transition: all .2s ease;\r\n}\r\n\r\n.form-input:focus + .form-label span,\r\n.form-input.valid + .form-label span\r\n{\r\n    bottom: 2.5rem;\r\n    color:  #FFDA73;\r\n}\r\n\r\n.form-input.valid + .form-label:after,\r\n.form-input.is-error + .form-label:after{\r\n    left: 0;\r\n}\r\n\r\n.form-input.is-error + .form-label:after{\r\n    border-bottom: 2px solid rgb(97, 3, 3);\r\n}\r\n\r\n.form-error{\r\n    margin: 0;\r\n    position: absolute;\r\n    top: 100%;\r\n    color: rgb(97, 3, 3);\r\n    font-size: .8rem;\r\n    white-space: nowrap;\r\n}\r\n\r\n@-webkit-keyframes animate{\r\n    from{\r\n        transform: translateX(-5px);\r\n    }\r\n    to{\r\n        transform: translateX(5px);\r\n    }\r\n}\r\n\r\n@keyframes animate{\r\n    from{\r\n        transform: translateX(-5px);\r\n    }\r\n    to{\r\n        transform: translateX(5px);\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -72715,8 +72715,8 @@ var validationSchema = yup__WEBPACK_IMPORTED_MODULE_4__["object"]().shape({
   lastName: yup__WEBPACK_IMPORTED_MODULE_4__["string"]().required('Enter your last name'),
   phone: yup__WEBPACK_IMPORTED_MODULE_4__["string"]().required().matches(/^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/, 'Phone must have 10 numbers'),
   street: yup__WEBPACK_IMPORTED_MODULE_4__["string"]().required('Please add street'),
-  house: yup__WEBPACK_IMPORTED_MODULE_4__["number"]().typeError('Please, enter house number').required().positive().integer(),
-  apartment: yup__WEBPACK_IMPORTED_MODULE_4__["number"]().typeError('Please, enter apartment number').required().positive().integer()
+  house: yup__WEBPACK_IMPORTED_MODULE_4__["number"]().typeError('Please, enter house').required().positive().integer(),
+  apartment: yup__WEBPACK_IMPORTED_MODULE_4__["number"]().typeError('Please, enter apartment').required().positive().integer()
 });
 
 var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
@@ -72789,36 +72789,32 @@ var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
     style: {
       flexGrow: 1
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Contacts:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["FormFieldContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Contacts:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["FormFieldContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "name",
     label: "Name",
     type: "text",
     inputRef: register,
-    placeholder: "John",
     errors: errors.name,
-    value: nameValue || name,
     onChange: function onChange(e) {
       return setName(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: nameValue || name
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "lastName",
     label: "Last name",
     type: "text",
     inputRef: register,
-    placeholder: "Smith",
     errors: errors.lastName,
-    value: lastNameValue || lastName,
     onChange: function onChange(e) {
       return setLastName(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: lastNameValue || lastName
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "phone",
     label: "Phone",
     type: "tel",
     inputRef: register,
-    placeholder: "(000) 111-22-33",
     errors: errors.phone,
-    value: phoneValue || phone,
     onChange: function onChange(e) {
       var value = e.target.value;
 
@@ -72828,18 +72824,19 @@ var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
 
       var result = value.replace(/[\s\D]/g, "").replace(/^(\d{1,2})/g, "($1").replace(/^(\(\d{3})/g, '$1)').replace(/^(\(\d{3}\))(\d{1,3})$/g, '$1 $2').replace(/^(\(\d{3}\))(\d{3})(\d{1,2})$/g, '$1 $2-$3').replace(/^(\(\d{3}\))(\d{3})(\d{2})(\d{1,2})$/g, '$1 $2-$3-$4').substr(0, 15);
       setPhone(result);
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Delivery Address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: phoneValue || phone
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Delivery Address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "street",
     label: "Street",
     type: "text",
     inputRef: register,
     errors: errors.street,
-    value: streetValue || street,
     onChange: function onChange(e) {
       return setStreet(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["FormFieldContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: streetValue || street
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["FormFieldContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "house",
     label: "House",
     type: "text",
@@ -72848,11 +72845,11 @@ var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
     style: {
       flexBasis: '200px'
     },
-    value: houseValue || house,
     onChange: function onChange(e) {
       return setHouse(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: houseValue || house
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "building",
     label: "Building",
     type: "text",
@@ -72860,11 +72857,11 @@ var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
     style: {
       flexBasis: '200px'
     },
-    value: buildingValue || building,
     onChange: function onChange(e) {
       return setBuilding(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+    },
+    value: buildingValue || ''
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "apartment",
     label: "Apart",
     type: "text",
@@ -72873,11 +72870,11 @@ var CheckoutFormComponent = function CheckoutFormComponent(_ref) {
     style: {
       flexBasis: '200px'
     },
-    value: apartmentValue || apartment,
     onChange: function onChange(e) {
       return setApartment(e.target.value);
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["MainButton"], {
+    },
+    value: apartmentValue || apartment
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["MainButton"], {
     as: "input",
     type: "submit",
     value: "Submit"
@@ -73066,19 +73063,19 @@ var FormField = function FormField(_ref) {
       inputRef = _ref.inputRef,
       errors = _ref.errors,
       style = _ref.style,
-      _ref$defaultValue = _ref.defaultValue,
-      defaultValue = _ref$defaultValue === void 0 ? '' : _ref$defaultValue,
-      inputParams = _objectWithoutProperties(_ref, ["name", "label", "normalize", "inputRef", "errors", "style", "defaultValue"]);
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      _ref$value = _ref.value,
+      value = _ref$value === void 0 ? '' : _ref$value,
+      inputParams = _objectWithoutProperties(_ref, ["name", "label", "normalize", "inputRef", "errors", "style", "className", "value"]);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-field",
+    className: "form-field-wrapper ".concat(errors && "is-error"),
     style: style
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "form-label",
-    id: "".concat(name, "-label"),
-    htmlFor: name
-  }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
-    className: "form-input ".concat(errors && "is-error"),
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-field"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+    className: "form-input ".concat((!errors && value !== '' || value.length > 0) && "valid", " ").concat(errors && "is-error"),
     "aria-labelledby": "".concat(name, "-label"),
     name: name,
     id: name,
@@ -73089,10 +73086,15 @@ var FormField = function FormField(_ref) {
       }
 
       e.target.value = normalize(e.target.value);
-    }
-  }, inputParams)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    },
+    value: value
+  }, inputParams)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-label ".concat(errors && "is-error"),
+    id: "".concat(name, "-label"),
+    htmlFor: name
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, label)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "form-error"
-  }, errors && 'Error: ' + errors.message));
+  }, errors && errors.message)));
 };
 
 /***/ }),
@@ -73236,6 +73238,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -73274,6 +73288,16 @@ var LoginForm = function LoginForm(_ref) {
       errors = _useForm.errors,
       handleSubmit = _useForm.handleSubmit;
 
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      email = _useState2[0],
+      setEmail = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     action: "POST",
     onSubmit: handleSubmit(submit)
@@ -73282,13 +73306,21 @@ var LoginForm = function LoginForm(_ref) {
     type: "email",
     inputRef: register,
     label: "Email",
-    errors: errors.email
+    errors: errors.email,
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     name: "password",
     type: "password",
     inputRef: register,
     label: "Password",
-    errors: errors.password
+    errors: errors.password,
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       textAlign: "right",
@@ -73401,6 +73433,21 @@ var SignUpForm = function SignUpForm(_ref) {
       isButtonDisabled = _useState8[0],
       setIsButtonDisabled = _useState8[1];
 
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      email = _useState10[0],
+      setEmail = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      name = _useState12[0],
+      setName = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      lastName = _useState14[0],
+      setLastName = _useState14[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (repassword && password === repassword) {
       setIsButtonDisabled(false);
@@ -73423,7 +73470,11 @@ var SignUpForm = function SignUpForm(_ref) {
     type: "email",
     inputRef: register,
     label: "Email",
-    errors: errors.email || errorForm
+    errors: errors.email || errorForm,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    value: email
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     name: "password",
     type: "password",
@@ -73432,7 +73483,11 @@ var SignUpForm = function SignUpForm(_ref) {
     errors: errors.password,
     onBlur: function onBlur(e) {
       return setPassword(e.target.value);
-    }
+    },
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    value: password
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     name: "repassword",
     type: "password",
@@ -73441,27 +73496,32 @@ var SignUpForm = function SignUpForm(_ref) {
     errors: errors.repassword || repasswordError,
     onChange: function onChange(e) {
       return setRepassword(e.target.value);
-    }
+    },
+    value: repassword
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     name: "name",
     type: "text",
     inputRef: register,
     label: "Name",
     errors: errors.name,
-    normalize: function normalize(value) {
+    onChange: function onChange(e) {
+      var value = e.target.value;
       var firstLetter = value[0].toUpperCase();
-      return firstLetter + value.substr(1);
-    }
+      setName(firstLetter + value.substr(1));
+    },
+    value: name
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     name: "lastName",
     type: "text",
     inputRef: register,
     label: "Last Name",
     errors: errors.lastName,
-    normalize: function normalize(value) {
+    onChange: function onChange(e) {
+      var value = e.target.value;
       var firstLetter = value[0].toUpperCase();
-      return firstLetter + value.substr(1);
-    }
+      setLastName(firstLetter + value.substr(1));
+    },
+    value: lastName
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       textAlign: "right"
@@ -74161,6 +74221,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _withContacts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../withContacts */ "./resources/js/withContacts.js");
 
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -74263,7 +74325,6 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     label: "Phone",
     type: "tel",
     inputRef: register,
-    placeholder: "(000) 111-22-33",
     errors: errors.phone,
     value: phoneValue || '',
     onChange: function onChange(e) {
@@ -74279,7 +74340,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     style: {
       flexBasis: "600px"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], _defineProperty({
     name: "street",
     label: "Street",
     type: "text",
@@ -74292,7 +74353,7 @@ var ProfileForm = Object(_withContacts__WEBPACK_IMPORTED_MODULE_7__["withContact
     style: {
       flexBasis: "600px"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
+  }, "value", streetValue)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FormField__WEBPACK_IMPORTED_MODULE_5__["FormField"], {
     name: "house",
     label: "House",
     type: "text",
@@ -74852,7 +74913,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    &>*{\n        flex-basis: 200px;\n        flex-grow: 1;\n        flex-shrink: 1;\n    }\n "]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    align-items: flex-start;\n    margin-bottom: 1rem;\n    &>*{\n        flex-basis: 200px;\n        flex-grow: 1;\n        flex-shrink: 1;\n    }\n "]);
 
   _templateObject21 = function _templateObject21() {
     return data;

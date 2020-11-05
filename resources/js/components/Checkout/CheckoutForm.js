@@ -13,8 +13,8 @@ const validationSchema = yup.object().shape({
     phone: yup.string().required()
             .matches(/^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/, 'Phone must have 10 numbers'),
     street: yup.string().required('Please add street'),
-    house: yup.number().typeError('Please, enter house number').required().positive().integer(),
-    apartment: yup.number().typeError('Please, enter apartment number').required().positive().integer()
+    house: yup.number().typeError('Please, enter house').required().positive().integer(),
+    apartment: yup.number().typeError('Please, enter apartment').required().positive().integer()
 })
 
 const CheckoutFormComponent = ( {submit = async () => {}, contacts} ) => {
@@ -38,96 +38,108 @@ const CheckoutFormComponent = ( {submit = async () => {}, contacts} ) => {
         <form onSubmit={handleSubmit(submit)} style={{flexGrow: 1}}>
             <h3>Contacts:</h3>
             <FormFieldContainer>
-                    <FormField 
-                        name="name"
-                        label="Name"
-                        type="text"
+                    <div>
+                        <FormField 
+                            name="name"
+                            label="Name"
+                            type="text"
+                            inputRef={register}
+                            errors={errors.name}
+                            onChange = { e => setName(e.target.value)}
+                            value={nameValue || name}
+                        />
+                    </div>
+                    <div>
+                        <FormField 
+                            name="lastName"
+                            label="Last name"
+                            type="text"
+                            inputRef={register}
+                            errors={errors.lastName}
+                            onChange = { e => setLastName(e.target.value)}
+                            value={lastNameValue || lastName}
+    
+                        />
+                    </div>
+                    <div>
+                        <FormField
+                        name="phone"
+                        label="Phone"
+                        type="tel"
                         inputRef={register}
-                        placeholder="John"
-                        errors={errors.name}
-                        value={nameValue || name}
-                        onChange = { e => setName(e.target.value)}
-                    />
-                    <FormField 
-                        name="lastName"
-                        label="Last name"
-                        type="text"
-                        inputRef={register}
-                        placeholder="Smith"
-                        errors={errors.lastName}
-                        value={lastNameValue || lastName}
-                        onChange = { e => setLastName(e.target.value)}
-
-                    />
-                    <FormField
-                    name="phone"
-                    label="Phone"
-                    type="tel"
-                    inputRef={register}
-                    placeholder="(000) 111-22-33"
-                    errors={errors.phone}
-                    value={phoneValue || phone}
-                    onChange = { e => {
-                        let value = e.target.value;
-                        if(e.nativeEvent.inputType === 'deleteContentBackward'){
-                            return setPhone(value);
-                        }
-                        let result = value
-                            .replace(/[\s\D]/g, "")
-                            .replace(/^(\d{1,2})/g, `($1`)
-                            .replace(/^(\(\d{3})/g, '$1)')
-                            .replace(/^(\(\d{3}\))(\d{1,3})$/g, '$1 $2')
-                            .replace(/^(\(\d{3}\))(\d{3})(\d{1,2})$/g, '$1 $2-$3')
-                            .replace(/^(\(\d{3}\))(\d{3})(\d{2})(\d{1,2})$/g, '$1 $2-$3-$4')
-                            .substr(0, 15)
-                        setPhone(result);
-                    }}
-                    />
+                        errors={errors.phone}
+                        onChange = { e => {
+                            let value = e.target.value;
+                            if(e.nativeEvent.inputType === 'deleteContentBackward'){
+                                return setPhone(value);
+                            }
+                            let result = value
+                                .replace(/[\s\D]/g, "")
+                                .replace(/^(\d{1,2})/g, `($1`)
+                                .replace(/^(\(\d{3})/g, '$1)')
+                                .replace(/^(\(\d{3}\))(\d{1,3})$/g, '$1 $2')
+                                .replace(/^(\(\d{3}\))(\d{3})(\d{1,2})$/g, '$1 $2-$3')
+                                .replace(/^(\(\d{3}\))(\d{3})(\d{2})(\d{1,2})$/g, '$1 $2-$3-$4')
+                                .substr(0, 15)
+                            
+                            setPhone(result);
+                        }}
+                        value={phoneValue || phone}
+                        />
+                    </div>
             </FormFieldContainer>
         <h3>Delivery Address</h3>
-        <FormField 
-            name="street"
-            label="Street"
-            type="text"
-            inputRef={register}
-            errors={errors.street}
-            value={streetValue || street}
-            onChange = { e => setStreet(e.target.value)}
-
-        />
-        <FormFieldContainer>
+        <div>
             <FormField 
-                name="house"
-                label="House"
+                name="street"
+                label="Street"
                 type="text"
                 inputRef={register}
-                errors={errors.house}
-                style={{flexBasis: '200px'}}
-                value={houseValue || house}
-                onChange = { e => setHouse(e.target.value)}
-
+                errors={errors.street}
+                onChange = { e => setStreet(e.target.value)}
+                value={streetValue || street}
+    
             />
-            <FormField
-                name="building"
-                label="Building"
-                type="text"
-                inputRef={register}
-                style={{flexBasis: '200px'}}
-                value={buildingValue || building}
-                onChange = { e => setBuilding(e.target.value)}
-
-            />
-            <FormField
-                name="apartment"
-                label="Apart"
-                type="text"
-                inputRef={register}
-                errors={errors.apartment}
-                style={{flexBasis: '200px'}}
-                value={apartmentValue || apartment}
-                onChange = { e => setApartment(e.target.value)}
-
-            />
+        </div>
+        <FormFieldContainer>
+            <div>
+                <FormField 
+                    name="house"
+                    label="House"
+                    type="text"
+                    inputRef={register}
+                    errors={errors.house}
+                    style={{flexBasis: '200px'}}
+                    onChange = { e => setHouse(e.target.value)}
+                    value={houseValue || house}
+    
+                />
+            </div>
+            <div>
+                <FormField
+                    name="building"
+                    label="Building"
+                    type="text"
+                    inputRef={register}
+                    style={{flexBasis: '200px'}}
+                    onChange = { e => setBuilding(e.target.value)}
+                    value={buildingValue || ''}
+    
+                />
+            </div>
+            <div>
+                <FormField
+                    name="apartment"
+                    label="Apart"
+                    type="text"
+                    inputRef={register}
+                    errors={errors.apartment}
+                    style={{flexBasis: '200px'}}
+                    onChange = { e => setApartment(e.target.value)}
+                    value={apartmentValue || apartment}
+    
+                />
+            </div>
         </FormFieldContainer>
         <MainButton as="input" type="submit" value="Submit"/>
         </form>
