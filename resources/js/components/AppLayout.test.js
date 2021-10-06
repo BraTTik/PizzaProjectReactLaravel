@@ -5,10 +5,10 @@ import { render, fireEvent } from '@testing-library/react';
 jest.mock('./UserPanel', () => ({UserPanel: ()=> <div>User Panel</div>}))
 
 describe('AppLayout', () => {
-        
+
     test('renders correctly', () => {
         const { container, history } = renderWithRouter((()=><AppLayout />));
-    
+
         expect(container.innerHTML).toMatch('Mama Mia');
         expect(container.innerHTML).toMatch('User Panel');
     })

@@ -155,7 +155,7 @@ export const CartItemContainerDescription = styled.div`
     }
     p{
         max-height: 55px;
-        overflow-y: hidden;
+        overflow-y: scroll;
     }
 `
 
@@ -192,7 +192,7 @@ export const EmptyCartContainer = styled.div`
     width: 100%;
     min-height: 100vh;
     background-color: #fff;
-    position: relative; 
+    position: relative;
     margin-top: -5rem;
 `
 
@@ -297,11 +297,18 @@ const rotate = keyframes`
 `;
 
 export const Loader = styled.div`
-    width: 150px;
-    animation: ${rotate} 3s ease infinite;
-    position: absolute;
-    top: 40%;
-    left: 40%;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 150px;
+        top: 50%;
+        left: 50%;
+        animation: ${rotate} 3s ease infinite;
+    }
 `
 
 export const HistoryItemContainer = styled.div`
